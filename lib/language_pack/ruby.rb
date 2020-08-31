@@ -63,7 +63,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     instrument "ruby.default_config_vars" do
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8",
-        "LD_LIBRARY_PATH" => "./app/vendor/gsl/lib",
+        "LD_LIBRARY_PATH" => "./app/vendor/gsl-1/lib",
       }
 
       ruby_version.jruby? ? vars.merge({
@@ -112,12 +112,12 @@ WARNING
         puts run("pwd")
         puts run("ls ./app/vendor")
 
-        run("cp -R ./vendor/gsl ./app/vendor/gsl")
+        run("cp -R ./vendor/gsl-1 ./app/vendor/gsl-1")
 
         puts "Just copied files to the ./app/vendor dir"
         puts run("ls ./app/vendor")
 
-        # /tmp/build_e8912e2f/app/vendor/gsl exists now and has the gsl files
+        # /tmp/build_e8912e2f/app/vendor/gsl-1 exists now and has the gsl files
 
         puts ENV["PATH"]
 
@@ -398,7 +398,7 @@ EOF
       ENV["DISABLE_SPRING"] = "1"
 
       # include the gsl directory
-      paths << "#{build_path}/app/vendor/gsl/bin"
+      paths << "#{build_path}/app/vendor/gsl-1/bin"
 
       # Rails has a binstub for yarn that doesn't work for all applications
       # we need to ensure that yarn comes before local bin dir for that case
@@ -778,7 +778,7 @@ EOF
 
   def install_gsl
     topic("Installing gsl")
-    bin_dir = "vendor/gsl"
+    bin_dir = "vendor/gsl-1"
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{GSL_VENDOR_URL} -s -o - | tar xzf -")

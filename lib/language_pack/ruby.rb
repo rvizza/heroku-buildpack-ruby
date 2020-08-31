@@ -20,9 +20,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   LIBYAML_PATH         = "libyaml-#{LIBYAML_VERSION}"
   RBX_BASE_URL         = "http://binaries.rubini.us/heroku"
   NODE_BP_PATH         = "vendor/node/bin"
-  # GSL_VENDOR_URL       = "https://s3.amazonaws.com/gsl_bin/gsl-1.15.tgz"
-  GSL_VENDOR_URL       = "ftp://ftp.gnu.org/gnu/gsl/gsl-1.14.tar.gz"
-
+  GSL_VENDOR_URL       = "https://s3.amazonaws.com/gsl_bin/gsl-1.15.tgz"
 
   Layer = LanguagePack::Helpers::Layer
 

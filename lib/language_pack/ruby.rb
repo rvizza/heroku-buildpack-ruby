@@ -117,6 +117,8 @@ WARNING
         puts "Just copied files to the ./app/vendor dir"
         puts run("ls ./app/vendor")
 
+        puts ENV["PATH"]
+
         install_bundler_in_app(slug_vendor_base)
         load_bundler_cache
         build_bundler(bundle_path: "vendor/bundle", default_bundle_without: "development:test")
@@ -394,7 +396,7 @@ EOF
       ENV["DISABLE_SPRING"] = "1"
 
       # include the gsl directory
-      paths << "./app/vendor/gsl/bin"
+      paths << "/app/vendor/gsl/bin"
 
       # Rails has a binstub for yarn that doesn't work for all applications
       # we need to ensure that yarn comes before local bin dir for that case

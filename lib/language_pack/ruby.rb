@@ -63,7 +63,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     instrument "ruby.default_config_vars" do
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8",
-        "LD_LIBRARY_PATH" => "./app/vendor/gsl-1/lib",
+        "LD_LIBRARY_PATH" => "/app/vendor/gsl-1/lib",
       }
 
       ruby_version.jruby? ? vars.merge({

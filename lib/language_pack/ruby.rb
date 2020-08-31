@@ -107,7 +107,16 @@ WARNING
       allow_git do
         install_gsl
         FileUtils.mkdir_p "./app/vendor"
+
+        puts "Just created ./app/vendor dir"
+        puts run("pwd")
+        puts run("ls ./app/vendor")
+
         run("cp -R ./vendor/gsl ./app/vendor/gsl")
+
+        puts "Just copied files to the ./app/vendor dir"
+        puts run("ls ./app/vendor")
+
         install_bundler_in_app(slug_vendor_base)
         load_bundler_cache
         build_bundler(bundle_path: "vendor/bundle", default_bundle_without: "development:test")
@@ -769,6 +778,10 @@ EOF
     FileUtils.mkdir_p bin_dir
     Dir.chdir(bin_dir) do |dir|
       run("curl #{GSL_VENDOR_URL} -s -o - | tar xzf -")
+
+      puts run("pwd")
+      puts run("ls")
+
     end
   end
 

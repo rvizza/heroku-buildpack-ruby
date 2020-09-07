@@ -64,6 +64,8 @@ class LanguagePack::Ruby < LanguagePack::Base
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8",
         "CPPFLAGS" => "-I#{build_path}/app/vendor/gsl-1/include",
+        "LD_LIBRARY_PATH" => "#{build_path}/app/vendor/gsl-1/lib",
+        "BUILD_PATH" => build_path,
       }
 
       ruby_version.jruby? ? vars.merge({
@@ -401,9 +403,6 @@ EOF
       paths << ENV["PATH"]
 
       ENV["PATH"] = paths.join(":")
-
-      # override LD_LIBRARY_PATH to ensure full path exists
-      ENV["LD_LIBRARY_PATH"] = "#{build_path}/app/vendor/gsl-1/lib"
     end
   end
 

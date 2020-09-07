@@ -108,7 +108,6 @@ WARNING
         install_gsl
         FileUtils.mkdir_p "./app/vendor"
         run("cp -R ./vendor/gsl-1 ./app/vendor/gsl-1")
-        ENV["LD_LIBRARY_PATH"] = "#{build_path}/app/vendor/gsl-1/lib"
         install_bundler_in_app(slug_vendor_base)
         load_bundler_cache
         build_bundler(bundle_path: "vendor/bundle", default_bundle_without: "development:test")
@@ -402,6 +401,9 @@ EOF
       paths << ENV["PATH"]
 
       ENV["PATH"] = paths.join(":")
+
+      # override LD_LIBRARY_PATH to ensure full path exists
+      ENV["LD_LIBRARY_PATH"] = "#{build_path}/app/vendor/gsl-1/lib"
     end
   end
 

@@ -63,11 +63,8 @@ class LanguagePack::Ruby < LanguagePack::Base
     instrument "ruby.default_config_vars" do
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8",
-        "LD_LIBRARY_PATH" => "#{build_path}/app/vendor/gsl-1/lib",
         "CPPFLAGS" => "-I#{build_path}/app/vendor/gsl-1/include",
       }
-      puts "vars after LD_LIBRARY_PATH assignment"
-      puts vars["LD_LIBRARY_PATH"]
 
       ruby_version.jruby? ? vars.merge({
         "JAVA_OPTS" => default_java_opts,
@@ -111,6 +108,7 @@ WARNING
         install_gsl
         FileUtils.mkdir_p "./app/vendor"
         run("cp -R ./vendor/gsl-1 ./app/vendor/gsl-1")
+        ENV["LD_LIBRARY_PATH"] = "#{build_path}/app/vendor/gsl-1/lib"
         install_bundler_in_app(slug_vendor_base)
         load_bundler_cache
         build_bundler(bundle_path: "vendor/bundle", default_bundle_without: "development:test")

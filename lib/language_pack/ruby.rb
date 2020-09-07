@@ -67,7 +67,7 @@ class LanguagePack::Ruby < LanguagePack::Base
         "CPPFLAGS" => "-I#{build_path}/app/vendor/gsl-1/include",
       }
       puts "vars after LD_LIBRARY_PATH assignment"
-      puts vars
+      puts vars["LD_LIBRARY_PATH"]
 
       ruby_version.jruby? ? vars.merge({
         "JAVA_OPTS" => default_java_opts,
